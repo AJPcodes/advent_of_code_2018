@@ -1,19 +1,13 @@
-defmodule DayOne.ChallengeTwo do
+defmodule D1.Ch2 do
 
   @input_file_path './challenge_inputs/day_one/challenge_one.txt'
 
   def start do
 
-    parse_file
-
-  end
-
-  def parse_file do
-
-      File.stream!(@input_file_path, [], :line)
-      |> Stream.map(&String.replace_suffix(&1, "\n", ""))
-      |> Enum.map(&String.to_integer(&1))
-      |> dupe_check
+    @input_file_path
+    |> ChallengeFileLoader.parse_file_to_lines
+    |> Enum.map(&String.to_integer(&1))
+    |> dupe_check
 
   end
 

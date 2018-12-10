@@ -13,6 +13,6 @@ defmodule AdventOfCode2018 do
 
   """
   def run_solutions do
-    DayOne.ChallengeOne.start()
+    D1.Ch1.start()
   end
 end
