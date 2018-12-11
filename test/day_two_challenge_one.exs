@@ -1,40 +1,29 @@
 defmodule Test.D2.Ch1 do
-
   use ExUnit.Case
 
   @char_counts %{"a" => 1, "b" => 1, "c" => 1, "d" => 1}
   # @input ["abcdef", "bababc", "abbcde", "abcccd", "aabcdd", "abcdee", "ababab" ]
 
   test "Can count letters" do
-
     assert D2.Ch1.char_counts("abcd")["a"] == 1
     assert D2.Ch1.char_counts("abcbcbd")["b"] == 3
     assert D2.Ch1.char_counts("abcdabcdefg")["f"] == 1
-
   end
 
   test "Can find doubles" do
-
     assert D2.Ch1.has_dupes(%{"a" => 1, "b" => 1, "c" => 1, "d" => 1}) == false
     assert D2.Ch1.has_dupes(%{"a" => 1, "b" => 1, "c" => 3, "d" => 1}) == false
     assert D2.Ch1.has_dupes(%{"a" => 1, "b" => 5, "c" => 1, "d" => 1}) == false
     assert D2.Ch1.has_dupes(%{"a" => 1, "b" => 2, "c" => 1, "d" => 1}) == true
-
   end
 
   test "Can find triples" do
-
     assert D2.Ch1.has_trips(%{"a" => 1, "b" => 1, "c" => 1, "d" => 1}) == false
     assert D2.Ch1.has_trips(%{"a" => 1, "b" => 1, "c" => 3, "d" => 1}) == true
     assert D2.Ch1.has_trips(%{"a" => 1, "b" => 5, "c" => 1, "d" => 1}) == false
     assert D2.Ch1.has_trips(%{"a" => 1, "b" => 2, "c" => 1, "d" => 1}) == false
-
-
   end
-
-
 end
-
 
 """
 For example, if you see the following box IDs:
