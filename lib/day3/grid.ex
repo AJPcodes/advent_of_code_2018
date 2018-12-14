@@ -7,8 +7,24 @@ defmodule Grid do
 
    end
 
+
+   def create_with_arrays() do
+
+      Enum.to_list(1..1000)
+      |> Enum.map(fn _v -> for n <- 1..1000, do: [] end)
+
+     end
+
    def sum(grid) do
       Enum.reduce(grid, 0, fn x, acc -> (Enum.map(x, &clean/1) |> Enum.sum()) + acc end)
+   end
+
+   def find_overlaps(grid) do
+      grid
+      |> Enum.map(fn row -> Enum.filter(row, fn x -> Enum.count(x) > 1 end) end)
+      |> List.flatten
+      |> Enum.dedup
+
    end
 
    def update(%{
@@ -26,6 +42,21 @@ defmodule Grid do
       start ++ middle ++ remaining
    end
 
+   def update_using_ids(%{
+      id: id,
+      left: left,
+      top: top,
+      width: width,
+      height: height
+    }, grid) do
+
+      {start, tail} = Enum.split(grid, top)
+      {rows_to_update, remaining} = Enum.split(tail, height)
+
+      middle = Enum.map(rows_to_update, fn row -> update_row(row, left, width, id) end)
+      start ++ middle ++ remaining
+   end
+
    def update_row(row, left, width) do
 
       {start, tail} = Enum.split(row, left)
@@ -38,6 +69,17 @@ defmodule Grid do
            1 -> 1
          end
          end)
+
+      start ++ middle ++ remaining
+
+   end
+
+   def update_row(row, left, width, id) do
+
+      {start, tail} = Enum.split(row, left)
+      {updates, remaining} = Enum.split(tail, width)
+
+      middle = Enum.map(updates, fn x -> x ++ [id] end)
 
       start ++ middle ++ remaining
 
